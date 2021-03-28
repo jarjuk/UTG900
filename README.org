@@ -127,7 +127,7 @@ Example usage:
 
 Options of  ~sine~ -command
 
-#+BEGIN_SRC bash :eval no-export :results output
+#+BEGIN_SRC bash :eval no-export :results output :export both
 ./UTG900.py ? command=sine
 #+END_SRC
 
@@ -183,7 +183,7 @@ Options of  ~square~ -command
 
 Options of  ~pulse~ -command
 
-#+BEGIN_SRC bash :eval no-export :results output
+#+BEGIN_SRC bash :eval no-export :results output :exports both
 ./UTG900.py ? command=pulse
 #+END_SRC
 
@@ -207,7 +207,7 @@ pulse - Generate pulse -wave on channel 1|2
 
 Options of  ~on~ -command
 
-#+BEGIN_SRC bash :eval no-export :results output :export both
+#+BEGIN_SRC bash :eval no-export :results output :exports both
 ./UTG900.py ? command=on
 #+END_SRC
 
@@ -219,7 +219,7 @@ Options of  ~on~ -command
 
 Options of  ~off~ -command
 
-#+BEGIN_SRC bash :eval no-export :results output :export both
+#+BEGIN_SRC bash :eval no-export :results output :exports both
 ./UTG900.py ? command=off
 #+END_SRC
 
@@ -227,7 +227,6 @@ Options of  ~off~ -command
 : off - Switch off channel 1|2
 : 
 :         ch  : Channel 1,2 to switch on/off
-
 
 
 
