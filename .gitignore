@@ -1,0 +1,6 @@
+*.html
+*.pdf
+*.tex
+utg900.egg-info
+build
+README.org.old
