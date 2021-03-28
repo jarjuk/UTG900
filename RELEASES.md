@@ -1,5 +1,8 @@
 
 ## 0.0.4-SNAPSHOT/20210328-23:09:06
+
+- README.org: comment delivery internal only
+
 ## 0.0.3/20210328-23:08:07
 
 - README.org: installation
