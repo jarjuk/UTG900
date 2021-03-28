@@ -49,7 +49,7 @@ UTG900.py sine ch=1 square ch=2    : chaining sine command on channel 1, and squ
 
 To list options run 
 
-#+BEGIN_SRC bash :eval no-export :results output
+#+BEGIN_SRC bash :eval no-export :results output :exports both
 ./UTG900.py --help
 #+END_SRC
 
