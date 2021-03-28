@@ -127,7 +127,7 @@ Example usage:
 
 Options of  ~sine~ -command
 
-#+BEGIN_SRC bash :eval no-export :results output :export both
+#+BEGIN_SRC bash :eval no-export :results output :exports both
 ./UTG900.py ? command=sine
 #+END_SRC
 
@@ -142,7 +142,7 @@ Options of  ~sine~ -command
 
 
 
-For example, chaing of ~reset~, ~sine~, and ~screen~ commands. As the
+For example, chaining of ~reset~, ~sine~, and ~screen~ commands. As the
 result, the waveform generator generates 1 MHz sine signal on channel
 1, with amplitude of 0.1V, offset of -0.5V, and phase of 42 degreees.
 Finally, a screenshot is taken to file ~example-sine.png~.
