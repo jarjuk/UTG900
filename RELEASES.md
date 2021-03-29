@@ -1,7 +1,20 @@
 
 ## 0.0.4-SNAPSHOT/20210328-23:09:06
 
-- README.org: comment delivery internal only
+- Issues fixed
+  - Document fixes: 
+    - document order of command parameters
+    - document interactive mode
+    - on-line help: added `--addr` -documentation
+    - added DEVELOPMENT.org (moved delivery section from README.org)
+
+- Features added:
+  - `UTG900.py list_resources` -command added
+  - `UTG900.py version`  -command added
+
+- Known issues:
+  - README.org: missing API -usage documentation
+  
 
 ## 0.0.3/20210328-23:08:07
 

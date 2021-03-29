@@ -1,6 +1,7 @@
 *.html
 *.pdf
 *.tex
+UTG900.spec
 utg900.egg-info
 build
 README.org.old

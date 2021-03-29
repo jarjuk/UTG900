@@ -1,2 +1,10 @@
+2021-03-29  jj  <jj@santtu>
 
+	* UTG900/UTG900.py (mainMenuHelp): added version output
+
+	* DEVELOPMENT.org: added pyinstaller section
+
+	* UTG900/UTG900.py (subMenuHelp): add comment on parameter order, optionality
+
+	* README.org: Document interactive mode
 

@@ -5,6 +5,25 @@
 :header-args:bash: :dir  UTG900
 :END:
 
+*** Interactive mode
+
+Command
+
+#+BEGIN_SRC bash :eval no :results output :exports both
+./UTG900.py
+#+END_SRC
+
+starts UTG-900 - Tool in interactive mode, and prompts user with
+
+#+begin_example
+Command [q=quit,?=help] >
+#+end_example
+
+- Help, and list of commands is presented with ~?~.
+- Giving ~q~ exits the program
+- Entering command name to the propts ask for command parameters
+
+
 *** Command ~?~
 
 Running 
@@ -18,32 +37,39 @@ shows commad usage
 
 #+RESULTS: help
 #+begin_example
-UTG900.py - Tool to control UNIT-T UTG900 Waveform generator
+UTG900.py - 0.0.4-SNAPSHOT: Tool to control UNIT-T UTG900 Waveform generator
 
-Usage: UTG900.py [options] [commands and properties] 
+Usage: UTG900.py [options] [commands and parameters] 
 
 Commands:
-         q  : Exit
-         Q  : Exit
-         ?  : Usage help
-      sine  : Generate sine -wave on channel 1|2
-    square  : Generate square -wave on channel 1|2
-     pulse  : Generate pulse -wave on channel 1|2
-        on  : Switch on channel 1|2
-       off  : Switch off channel 1|2
-     reset  : Send reset to UTG900 signal generator
-    screen  : Take screenshot to 'captureDir'
+              q  : Exit
+              Q  : Exit
+              ?  : Usage help
+           sine  : Generate sine -wave on channel 1|2
+         square  : Generate square -wave on channel 1|2
+          pulse  : Generate pulse -wave on channel 1|2
+             on  : Switch on channel 1|2
+            off  : Switch off channel 1|2
+          reset  : Send reset to UTG900 signal generator
+         screen  : Take screenshot to 'captureDir'
+ list_resources  : List pyvisa resources (=pyvisa list_resources() wrapper)'
+        version  : Output version number
 
 More help:
-UTG900.py --help                   : to list options
-UTG900.py ? command=<command>      : to get help on command <command>
+  UTG900.py --help                          : to list options
+  UTG900.py ? command=<command>             : to get help on command <command> parameters
 
 Examples:
-UTG900.py ? command=sine           : help on sine command
-UTG900.py --captureDir=pics screen : Take screenshot to pics directory
-UTG900.py reset                    : Send reset to UTH900 waveform generator
-UTG900.py sine ch=2 freq=2kHz      : 2 kHz sine signal on channel 1
-UTG900.py sine ch=1 square ch=2    : chaining sine command on channel 1, and square command  on channel 2
+  UTG900.py ? command=sine                  : help on sine command parameters
+  UTG900.py list_resources                  : Identify --addr option parameter
+  UTG900.py --addr 'USB0::1::2::3::0::INSTR': Run interactively on device found in --addr 'USB0::1::2::3::0::INSTR'
+  UTG900.py --captureDir=pics screen        : Take screenshot to pics directory (form device in default --addr)
+  UTG900.py reset                           : Send reset to UTH900 waveform generator
+  UTG900.py sine ch=2 freq=2kHz             : Generate 2 kHz sine signal on channel 2
+  UTG900.py sine ch=1 square ch=2           : chaining sine generation on channel 1, and square generation on channel 2
+
+Hint:
+  One-liner in linux: UTG900.py --addr $(UTG900.py list_resources)
 #+end_example
 
 
@@ -84,6 +110,10 @@ Options of  ~screen~ -command
 : screen - Take screenshot to 'captureDir'
 : 
 :   fileName  : Screen capture file name (optional)
+: 
+: Notice:
+: - parameters MUST BE given in the order listed above
+: - parameters are optional and they MAY BE left out
 
 For example, running command
 
@@ -112,6 +142,11 @@ Options of  ~reset~ -command
 #+RESULTS:
 : reset - Send reset to UTG900 signal generator
 : 
+: *No parameters*
+: 
+: Notice:
+: - parameters MUST BE given in the order listed above
+: - parameters are optional and they MAY BE left out
 
 Example usage:
 
@@ -132,13 +167,19 @@ Options of  ~sine~ -command
 #+END_SRC
 
 #+RESULTS:
-: sine - Generate sine -wave on channel 1|2
-: 
-:         ch  : Channel for wave generation
-:       freq  : Frequency [uHz|mHz|kHz|MHz]
-:        amp  : Amplitude [mVpp|Vpp|mVrms|Vrms]
-:     offset  : Offset [mV|V]
-:      phase  : Phase [deg]
+#+begin_example
+sine - Generate sine -wave on channel 1|2
+
+        ch  : Channel 1,2 to switch on/off
+      freq  : Frequency [uHz|mHz|kHz|MHz]
+       amp  : Amplitude [mVpp|Vpp|mVrms|Vrms]
+    offset  : Offset [mV|V]
+     phase  : Phase [deg]
+
+Notice:
+- parameters MUST BE given in the order listed above
+- parameters are optional and they MAY BE left out
+#+end_example
 
 
 
@@ -168,14 +209,20 @@ Options of  ~square~ -command
 #+END_SRC
 
 #+RESULTS:
-: square - Generate square -wave on channel 1|2
-: 
-:         ch  : Channel 1,2 to switch on/off
-:       freq  : Frequency [uHz|mHz|kHz|MHz]
-:        amp  : Amplitude [mVpp|Vpp|mVrms|Vrms]
-:     offset  : Offset [mV|V]
-:      phase  : Phase [deg]
-:       duty  : Duty [%]
+#+begin_example
+square - Generate square -wave on channel 1|2
+
+        ch  : Channel 1,2 to switch on/off
+      freq  : Frequency [uHz|mHz|kHz|MHz]
+       amp  : Amplitude [mVpp|Vpp|mVrms|Vrms]
+    offset  : Offset [mV|V]
+     phase  : Phase [deg]
+      duty  : Duty [%]
+
+Notice:
+- parameters MUST BE given in the order listed above
+- parameters are optional and they MAY BE left out
+#+end_example
 
 
 
@@ -199,6 +246,10 @@ pulse - Generate pulse -wave on channel 1|2
       duty  : Duty [%]
     raised  : Raise [ns,us,ms,s,ks]
       fall  : Fall [ns,us,ms,s,ks]
+
+Notice:
+- parameters MUST BE given in the order listed above
+- parameters are optional and they MAY BE left out
 #+end_example
 
 
@@ -215,6 +266,10 @@ Options of  ~on~ -command
 : on - Switch on channel 1|2
 : 
 :         ch  : Channel 1,2 to switch on/off
+: 
+: Notice:
+: - parameters MUST BE given in the order listed above
+: - parameters are optional and they MAY BE left out
 
 
 Options of  ~off~ -command
@@ -227,7 +282,65 @@ Options of  ~off~ -command
 : off - Switch off channel 1|2
 : 
 :         ch  : Channel 1,2 to switch on/off
+: 
+: Notice:
+: - parameters MUST BE given in the order listed above
+: - parameters are optional and they MAY BE left out
 
+
+
+*** Command ~list_resources~ - List pyvisa resourses
+
+Command usage
+
+#+BEGIN_SRC bash :eval no-export :results output :exports both
+./UTG900.py ? command=list_resources
+#+END_SRC
+
+#+RESULTS:
+: list_resources - List pyvisa resources (=pyvisa list_resources() wrapper)'
+: 
+: *No parameters*
+: 
+: Notice:
+: - parameters MUST BE given in the order listed above
+: - parameters are optional and they MAY BE left out
+
+Command ~list_resources~ 
+
+#+name: list_resources
+#+BEGIN_SRC bash :eval no-export :results output :exports both
+./UTG900.py list_resources
+#+END_SRC
+
+returns a list of devices, which pyvisa find. For example:
+
+#+RESULTS: list_resources
+: ('USB0::26198::2100::1485061822::0::INSTR',)
+
+
+An empty list is returned, when no device is found.
+
+#+BEGIN_SRC bash :eval no :results output :exports results
+./UTG900.py list_resources
+#+END_SRC
+
+#+RESULTS:
+: ()
+
+
+
+*** Command ~version~ - Output version number
+
+~version~ - command does not not take any parameters. It ouputs
+version number of the tool
+
+#+BEGIN_SRC bash :eval no-export :results output :exports both
+./UTG900.py version
+#+END_SRC
+
+#+RESULTS:
+: 0.0.4-SNAPSHOT
 
 
 ** Requirements 
@@ -336,67 +449,6 @@ Installing collected packages: utg900
 Successfully installed utg900-0.0.3
 installed dist/utg900-0.0.3.tar.gz
 #+end_example
-
-
-* Delivery                                                         :noexport:
-
-*Development environment only!!*
-
-** Relaseit
-
-*** Show release status
-
- #+BEGIN_SRC sh :eval no-export :results output
- releaseit.sh show
- #+END_SRC
-
- #+RESULTS:
- : /home/jj/bin/releaseit.sh - $Release:0.0.4-SNAPSHOT$
- : ------------------------------------------------------------------
- : PREV_REL=0.0.2 --> REL=0.0.3-SNAPSHOT
- : ------------------------------------------------------------------
- : ## 0.0.3-SNAPSHOT/20210328-23:02:58
- : 
- : - README.org: installation
- : ------------------------------------------------------------------
-
-
-*** Create release 
-
- Should not have any files unchecked
-
- #+BEGIN_SRC sh :eval no-export :results output
- git status
- #+END_SRC
-
- #+RESULTS:
- : On branch master
- : Your branch is ahead of 'origin/master' by 1 commit.
- :   (use "git push" to publish your local commits)
- : 
- : nothing to commit, working tree clean
-
-
- #+BEGIN_SRC sh :eval no-export :results output
- releaseit.sh  create_release commit current VERSION files README.org -  commit tag 2>&1 || true
- #+END_SRC
-
- #+RESULTS:
- : [master 1113226] ## 0.0.1/20210328-22:51:12
- :  1 file changed, 1 insertion(+), 1 deletion(-)
- : [master 7a712ea] ## 0.0.1/20210328-22:51:12
- :  1 file changed, 1 insertion(+), 1 deletion(-)
-
-
-** Create snapshot
-
- #+BEGIN_SRC sh :eval no-export :results output
- releaseit.sh  create_snapshot current VERSION files README.org - commit || true
- #+END_SRC
-
- #+RESULTS:
- : [master 1f4c927] ## 0.0.2-SNAPSHOT/20210328-22:55:43
- :  3 files changed, 53 insertions(+), 67 deletions(-)
 
 
  

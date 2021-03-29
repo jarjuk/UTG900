@@ -12,40 +12,53 @@ from time import sleep
 
 flags.DEFINE_integer('debug', -1, '-3=fatal, -1=warning, 0=info, 1=debug')
 flags.DEFINE_string('addr', "USB0::0x6656::0x0834::1485061822::INSTR", "UTG900 pyvisa resource address")
+## flags.DEFINE_string('addr', "USB0::0x6656::0x0834::12312::INSTR", "UTG900 pyvisa resource address")
 flags.DEFINE_string('captureDir', "pics", "Capture directory")
 
 CMD="UTG900.py"
+
+def version():
+    versionPath = os.path.join( os.path.dirname( __file__), "..", "VERSION")
+    with open( versionPath, "r") as fh:
+        version = fh.read().rstrip()
+    return version
+
 
 class UTG962:
          """
          Unit-T UTG900 signal generator PYVISA control wrapper.
          """
 
+         _rm = pyvisa.ResourceManager()
 
          # Construct && close
          def __init__( self, addr,  debug = False ):
-            self.rm = pyvisa.ResourceManager()
-            self.sgen = self.rm.open_resource(addr)
+            self.sgen = UTG962._rm.open_resource(addr)
             self.debug = debug
             if self.debug:
                  pyvisa.log_to_screen()
             try:
                 self.idn = self.sgen.query('*IDN?')
-                print("Successfully connected  '{}' with '{}'".format(addr, self.idn))
+                logging.warning("Successfully connected  '{}' with '{}'".format(addr, self.idn))
             except:
                 pass
             self.reset()
 
          def close(self ):
              try:
-                 self.rm.close()
-             except:
-                 pass
-
-             try:
+                 logging.info(  "Closing sgen {}".format(self.sgen))
                  self.sgen.close()
              except:
+                 logging.warning(  "Closing sgen {} - failed".format(self.sgen))                 
                  pass
+             try:
+                 logging.info(  "Closing Resource manager {}".format(UTG962._rm))
+                 UTG962._rm.close()
+                 UTG962._rm = None
+             except:
+                 logging.warn(  "Closing Resource manager {} - failed".format(UTG962._rm))
+                 pass
+
 
          # Low level commuincation 
          def write(self, cmd ):
@@ -370,23 +383,11 @@ class UTG962:
              self.on(ch)
          def getName(self):
             return( self.query( "*IDN?"))
+         def list_resources(self):
+             return self.rm.list_resources()
 
 # ------------------------------------------------------------------
 # State && Global
-
-mainMenu = {
-    'q'     : "Exit",
-    'Q'     : "Exit",
-    '?'     : "Usage help",
-    "sine"  : "Generate sine -wave on channel 1|2",
-    "square": "Generate square -wave on channel 1|2",
-    "pulse" : "Generate pulse -wave on channel 1|2",
-    "on"    : "Switch on channel 1|2",
-    "off"   : "Switch off channel 1|2",
-    "reset" : "Send reset to UTG900 signal generator",
-    "screen": "Take screenshot to 'captureDir'",
-}
-
 helpProps = {
     "command" : "show help for command",
 }
@@ -416,44 +417,78 @@ pulseProps = squareProps | {
 }
 
 subMenu = {
-    "sine"   : sineProps,
-    "square" : squareProps,
-    "pulse"  : pulseProps,
-    "on"     : onOffProps,
-    "off"    : onOffProps,
-    "screen" :  screenCaptureProps,
-    "reset"  :  {}
+    "sine"            : sineProps,
+    "square"          : squareProps,
+    "pulse"           : pulseProps,
+    "on"              : onOffProps,
+    "off"             : onOffProps,
+    "screen"          :  screenCaptureProps,
+    "reset"           :  {},
+    "list_resources"  :  {},
+    "version"         :  {},
 }
+
+
+mainMenu = {
+    'q'              : "Exit",
+    'Q'              : "Exit",
+    '?'              : "Usage help",
+    "sine"           : "Generate sine -wave on channel 1|2",
+    "square"         : "Generate square -wave on channel 1|2",
+    "pulse"          : "Generate pulse -wave on channel 1|2",
+    "on"             : "Switch on channel 1|2",
+    "off"            : "Switch off channel 1|2",
+    "reset"          : "Send reset to UTG900 signal generator",
+    "screen"         : "Take screenshot to 'captureDir'",
+    "list_resources" : "List pyvisa resources (=pyvisa list_resources() wrapper)'",
+    "version"        : "Output version number",
+}
+
+
 
 # ------------------------------------------------------------------
 def mainMenuHelp(mainMenu):
-    print( CMD, "- Tool to control UNIT-T UTG900 Waveform generator" )
+    print( "{} - {}: Tool to control UNIT-T UTG900 Waveform generator".format(CMD, version()) )
     print( "" )
-    print( "Usage: {} [options] [commands and properties] ".format( CMD ))
+    print( "Usage: {} [options] [commands and parameters] ".format( CMD ))
     print( "" )
     print( "Commands:")
     for k,v in mainMenu.items():
-        print( "%10s  : %s" % (k,v) )
+        print( "%15s  : %s" % (k,v) )
     print( "" )
     print( "More help:")
-    print( "{} --help                   : to list options".format(CMD) )
-    print( "{} ? command=<command>      : to get help on command <command>".format(CMD) )
+    print( "  {} --help                          : to list options".format(CMD) )
+    print( "  {} ? command=<command>             : to get help on command <command> parameters".format(CMD) )
     print( "")
     print( "Examples:")
-    print( "{} ? command=sine           : help on sine command".format(CMD))
-    print( "{} --captureDir=pics screen : Take screenshot to pics directory".format(CMD))
-    print( "{} reset                    : Send reset to UTH900 waveform generator".format(CMD))    
-    print( "{} sine ch=2 freq=2kHz      : 2 kHz sine signal on channel 1".format(CMD))
-    print( "{} sine ch=1 square ch=2    : chaining sine command on channel 1, and square command  on channel 2".format(CMD))
+    print( "  {} ? command=sine                  : help on sine command parameters".format(CMD))
+    print( "  {} list_resources                  : Identify --addr option parameter".format(CMD))
+    print( "  {} --addr 'USB0::1::2::3::0::INSTR': Run interactively on device found in --addr 'USB0::1::2::3::0::INSTR'".format(CMD))
+    print( "  {} --captureDir=pics screen        : Take screenshot to pics directory (form device in default --addr)".format(CMD))
+    print( "  {} reset                           : Send reset to UTH900 waveform generator".format(CMD))    
+    print( "  {} sine ch=2 freq=2kHz             : Generate 2 kHz sine signal on channel 2".format(CMD))
+    print( "  {} sine ch=1 square ch=2           : chaining sine generation on channel 1, and square generation on channel 2".format(CMD))
+    
+    print( "")
+    print( "Hint:")
+    print( "  One-liner in linux: {} --addr $({} list_resources)".format(CMD, CMD))
+    
 
 def subMenuHelp( command, menuText, subMenu ):
     print( "{} - {}".format( command, menuText))
     print( "" )
-    for k,v in subMenu.items():
-        print( "%10s  : %s" % (k,v) )
+    if len(subMenu.keys()) > 0:
+       for k,v in subMenu.items():
+           print( "%10s  : %s" % (k,v) )
+    else:
+        print( "*No parameters*")
+    print( "" )
+    print( "Notice:")
+    print( "- parameters MUST BE given in the order listed above")
+    print( "- parameters are optional and they MAY BE left out")
 
 def cmdHelp( command=None ):
-    if command is None:
+    if command is None or not command:
         mainMenuHelp(mainMenu)
     else:
         subMenuHelp( command, menuText=mainMenu[command], subMenu=subMenu[command] )
@@ -539,10 +574,13 @@ def main(_argv):
         elif cmd == 'q' or cmd == 'Q':
             goon = False
         elif cmd =='?':
-            propVals = {
-                k: promptValue(v,key=k,cmds=cmds) for k,v in helpProps.items()
-            }
-            cmdHelp( **propVals )
+            if cmds is None:
+                cmdHelp()
+            else:
+                propVals = {
+                    k: promptValue(v,key=k,cmds=cmds) for k,v in helpProps.items()
+                }
+                cmdHelp( **propVals )
         elif cmd == 'list':
             listResources()
         elif cmd == 'on':
@@ -575,6 +613,14 @@ def main(_argv):
             sgen().generate( wave="square", **propVals )
         elif cmd == 'reset':
             sgen().reset()
+        elif cmd == 'list_resources':
+            resourses = UTG962._rm.list_resources()
+            if len(resourses) == 1:
+                print( resourses[0] )
+            else:
+                print( resourses )
+        elif cmd == 'version':
+            print( version())
         elif cmd == 'screen':
             propVals = {
                 k: promptValue(v,key=k,cmds=cmds) for k,v in screenCaptureProps.items()
