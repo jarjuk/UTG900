@@ -66,7 +66,7 @@ Command [q=quit,?=help] >
 #+RESULTS:
 : Usage: UTG900.py [options] [commands and parameters] 
 
-See section =commands and parameters= below for details
+See section [[#commands-and-parameters][Commands and parameters]] below for details
 
 
 *** API usage
@@ -124,7 +124,24 @@ See section =commands and parameters= below for details
 :header-args:bash: :dir  UTG900
 :END:
 
-*** ~?~
+This chapter presents UTG900 -tool commands and associated parameters.
+
+Parameter value MUST be given with unit, if parameter definition lists
+units within square brackets. For example =amp= parameter definition
+lists units ~mVpp~, ~Vpp~, ~mVrms~, and ~Vrms~.
+
+#+begin_example
+amp  : Amplitude [mVpp|Vpp|mVrms|Vrms]
+#+end_example
+
+For example, valid ~amp~ parameter values are ~0.5Vpp~ or ~500mVpp~.
+
+In interactive mode, paremeter values are entered directly to the
+system prompt. In command line mode, parameters are given as key-value
+pairs, e.g. ~amp=0.5Vpp~ or ~amp=500mVpp~.
+
+
+*** ~?~ - get usage help
 
 Running 
 
@@ -190,7 +207,7 @@ flags:
   --addr: UTG900 pyvisa resource address
     (default: 'USB0::0x6656::0x0834::1485061822::INSTR')
   --captureDir: Capture directory
-    (default: 'tmp')
+    (default: 'pics')
   --debug: -3=fatal, -1=warning, 0=info, 1=debug
     (default: '-1')
     (an integer)
@@ -213,8 +230,8 @@ Parameters of  ~screen~ -command
 :   fileName  : Screen capture file name (optional)
 : 
 : Notice:
-: - parameters MUST BE given in the order listed above
-: - parameters are optional and they MAY BE left out
+: - parameters MUST be given in the order listed above
+: - parameters are optional and they MAY be left out
 
 For example, running command
 
@@ -246,8 +263,8 @@ Parameters of  ~reset~ -command
 : *No parameters*
 : 
 : Notice:
-: - parameters MUST BE given in the order listed above
-: - parameters are optional and they MAY BE left out
+: - parameters MUST be given in the order listed above
+: - parameters are optional and they MAY be left out
 
 Example usage:
 
@@ -272,14 +289,14 @@ Parameters of  ~sine~ -command
 sine - Generate sine -wave on channel 1|2
 
         ch  : Channel 1,2 to switch on/off
-      freq  : Frequency [uHz|mHz|kHz|MHz]
+      freq  : Frequency [uHz|mHz|Hz|kHz|MHz]
        amp  : Amplitude [mVpp|Vpp|mVrms|Vrms]
     offset  : Offset [mV|V]
      phase  : Phase [deg]
 
 Notice:
-- parameters MUST BE given in the order listed above
-- parameters are optional and they MAY BE left out
+- parameters MUST be given in the order listed above
+- parameters are optional and they MAY be left out
 #+end_example
 
 
@@ -314,15 +331,15 @@ Parameters of  ~square~ -command
 square - Generate square -wave on channel 1|2
 
         ch  : Channel 1,2 to switch on/off
-      freq  : Frequency [uHz|mHz|kHz|MHz]
+      freq  : Frequency [uHz|mHz|Hz|kHz|MHz]
        amp  : Amplitude [mVpp|Vpp|mVrms|Vrms]
     offset  : Offset [mV|V]
      phase  : Phase [deg]
       duty  : Duty [%]
 
 Notice:
-- parameters MUST BE given in the order listed above
-- parameters are optional and they MAY BE left out
+- parameters MUST be given in the order listed above
+- parameters are optional and they MAY be left out
 #+end_example
 
 
@@ -340,7 +357,7 @@ Parameters of  ~pulse~ -command
 pulse - Generate pulse -wave on channel 1|2
 
         ch  : Channel 1,2 to switch on/off
-      freq  : Frequency [uHz|mHz|kHz|MHz]
+      freq  : Frequency [uHz|mHz|Hz|kHz|MHz]
        amp  : Amplitude [mVpp|Vpp|mVrms|Vrms]
     offset  : Offset [mV|V]
      phase  : Phase [deg]
@@ -349,8 +366,8 @@ pulse - Generate pulse -wave on channel 1|2
       fall  : Fall [ns,us,ms,s,ks]
 
 Notice:
-- parameters MUST BE given in the order listed above
-- parameters are optional and they MAY BE left out
+- parameters MUST be given in the order listed above
+- parameters are optional and they MAY be left out
 #+end_example
 
 
@@ -559,8 +576,8 @@ UTG900/UTG900/UTG900.py --addr $(UTG900/UTG900/UTG900.py list_resources)
 #+END_SRC
 
 to connect to your device, and start interactivive session. For commad
-line use, pass commands and options documented above, in [[Commands and
-parameters]] section
+line use, pass commands and options documented above, in [[#commands-and-parameters][Commands and
+parameters]] -section
 
 
  

@@ -467,7 +467,7 @@ screenCaptureProps  = {
 }
 
 sineProps = onOffProps | {
-    'freq'  :   "Frequency [uHz|mHz|kHz|MHz]",
+    'freq'  :   "Frequency [uHz|mHz|Hz|kHz|MHz]",
     'amp'   :    "Amplitude [mVpp|Vpp|mVrms|Vrms]",
     'offset': "Offset [mV|V]",
     'phase' :  "Phase [deg]",
@@ -556,8 +556,8 @@ def subMenuHelp( command, menuText, subMenu ):
         print( "*No parameters*")
     print( "" )
     print( "Notice:")
-    print( "- parameters MUST BE given in the order listed above")
-    print( "- parameters are optional and they MAY BE left out")
+    print( "- parameters MUST be given in the order listed above")
+    print( "- parameters are optional and they MAY be left out")
 
 def cmdHelp( command=None ):
     if command is None or not command:
