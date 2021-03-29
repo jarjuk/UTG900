@@ -1,4 +1,4 @@
-* UTG-900 - Tool to control UNIT-T UTG900 Waveform generator $Release:0.0.4-SNAPSHOT$
+* UTG-900 - Tool to control UNIT-T UTG900 Waveform generator $Release:0.0.4$
 
 ** Usage
 :PROPERTIES:
