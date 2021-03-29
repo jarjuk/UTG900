@@ -57,7 +57,7 @@ Command [q=quit,?=help] >
 - Giving command name invokes sequence asking for command parameters
 
 
-*** Command line parameter usage
+*** Command line usage
 
 #+BEGIN_SRC bash :eval no-export :results output :exports results
 ./UTG900.py ? |  grep 'Usage:'
@@ -124,7 +124,7 @@ See section =commands and parameters= below for details
 :header-args:bash: :dir  UTG900
 :END:
 
-*** Command ~?~
+*** ~?~
 
 Running 
 
@@ -199,9 +199,9 @@ Try --helpfull to get a list of all flags.
 #+end_example
 
 
-*** Command ~screen~ - take screenshot
+*** ~screen~ - take screenshot
 
-Options of  ~screen~ -command
+Parameters of  ~screen~ -command
 
 #+BEGIN_SRC bash :eval no-export :results output :exports both
 ./UTG900.py ? command=screen
@@ -232,9 +232,9 @@ file.
 [[file:UTG900/pics/example1.png]]
 
 
-*** Command ~reset~ - Send reset command to UTG900 
+*** ~reset~ - Send reset command to UTG900 
 
-Options of  ~reset~ -command
+Parameters of  ~reset~ -command
 
 #+BEGIN_SRC bash :eval no-export :results output :exports both
 ./UTG900.py ? command=reset
@@ -259,9 +259,9 @@ Example usage:
 : Successfully connected  'USB0::0x6656::0x0834::1485061822::INSTR' with 'UNI-T Technologies,UTG900,1485061822,1.08'
 
 
-*** Command ~sine~ - Generate sive wave
+*** ~sine~ - Generate sive wave
 
-Options of  ~sine~ -command
+Parameters of  ~sine~ -command
 
 #+BEGIN_SRC bash :eval no-export :results output :exports both
 ./UTG900.py ? command=sine
@@ -301,9 +301,9 @@ The screenshot taken in the example above:
 [[file:UTG900/pics/example-sine.png]]
 
 
-*** Command ~square~ - Generate square wave
+*** ~square~ - Generate square wave
 
-Options of  ~square~ -command
+Parameters of  ~square~ -command
 
 #+BEGIN_SRC bash :eval no-export :results output :exports both
 ./UTG900.py ? command=square
@@ -327,9 +327,9 @@ Notice:
 
 
 
-*** Command ~pulse~ - Generate pulse wave
+*** ~pulse~ - Generate pulse wave
 
-Options of  ~pulse~ -command
+Parameters of  ~pulse~ -command
 
 #+BEGIN_SRC bash :eval no-export :results output :exports both
 ./UTG900.py ? command=pulse
@@ -355,9 +355,9 @@ Notice:
 
 
 
-*** Command ~arb~ - Upload wave file and use it to generate wave
+*** ~arb~ - Upload wave file and use it to generate wave
 
-Options of  ~arb~ -command
+Parameters of  ~arb~ -command
 
 #+BEGIN_SRC bash :eval no-export :results output :exports both
 ./UTG900.py ? command=arb
@@ -401,9 +401,9 @@ cat ../data/example1.csv
 
 
 
-*** Command ~on~ and ~off~ - Switch channel on/off
+*** ~on~ and ~off~ - Switch channel on/off
 
-Options of  ~on~ -command
+Parameters of  ~on~ -command
 
 #+BEGIN_SRC bash :eval no-export :results output :exports both
 ./UTG900.py ? command=on
@@ -419,7 +419,7 @@ Options of  ~on~ -command
 : - parameters are optional and they MAY BE left out
 
 
-Options of  ~off~ -command
+Parameters of ~off~ -command
 
 #+BEGIN_SRC bash :eval no-export :results output :exports both
 ./UTG900.py ? command=off
@@ -436,7 +436,7 @@ Options of  ~off~ -command
 
 
 
-*** Command ~list_resources~ - List pyvisa resourses
+*** ~list_resources~ - List pyvisa resourses
 
 Command usage
 
@@ -477,7 +477,7 @@ An empty list is returned, when no device is found.
 
 
 
-*** Command ~version~ - Output version number
+*** ~version~ - Output version number
 
 ~version~ - command does not not take any parameters. It ouputs
 version number of the tool
