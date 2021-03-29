@@ -9,6 +9,11 @@
     - [[#interactive-usage][Interactive usage]]
     - [[#command-line-parameter-usage][Command line parameter usage]]
     - [[#api-usage][API usage]]
+      - [[#import-package-and-show-version-number][Import package and show version number]]
+      - [[#list-resources][List resources]]
+      - [[#create--utg900utg962-object][Create  UTG900.UTG962 object]]
+      - [[#send-reset][Send reset]]
+      - [[#switch-channel-on-and-off][Switch channel on() and off]]
   - [[#commands-and-parameters][Commands and parameters]]
     - [[#command-][Command ?]]
     - [[#command-screen---take-screenshot][Command screen - take screenshot]]
@@ -32,9 +37,6 @@
 
 
 ** Usage
-:PROPERTIES:
-:header-args:bash: :dir  UTG900
-:END:
 
 *** Interactive usage
 
@@ -66,11 +68,60 @@ Command [q=quit,?=help] >
 
 See section =commands and parameters= below for details
 
+
 *** API usage
 
-*TBD*
+**** Import package and show version number
+
+ #+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python* :export both
+ import UTG900
+ print( UTG900.version())
+ #+END_SRC
+
+ #+RESULTS:
+ : Python 3.9.1 | packaged by conda-forge | (default, Jan 10 2021, 02:55:42) 
+ : [GCC 9.3.0] on linux
+ : Type "help", "copyright", "credits" or "license" for more information.
+ : 0.0.5-SNAPSHOT
+
+****  List resources
+ #+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python*
+ print( UTG900.list_resources())
+ #+END_SRC
+
+ #+RESULTS:
+ : ('USB0::26198::2100::1485061822::0::INSTR',)
+
+
+****  Create  =UTG900.UTG962= object
+
+ #+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python* 
+ sgen = UTG900.UTG962()
+ #+END_SRC
+
+ #+RESULTS:
+ : WARNING:absl:Successfully connected  'USB0::0x6656::0x0834::1485061822::INSTR' with 'UNI-T Technologies,UTG900,1485061822,1.08'
+
+****  Send =reset=
+ #+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python*
+ sgen.reset()
+ #+END_SRC
+
+ #+RESULTS:
+
+****  Switch channel =on()= and =off=
+ #+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python*
+ sgen.on( 1)
+ sgen.off(2)
+ #+END_SRC
+
+ #+RESULTS:
+
 
 ** Commands and parameters
+:PROPERTIES:
+:header-args:bash: :dir  UTG900
+:END:
 
 *** Command ~?~
 
@@ -411,7 +462,7 @@ Command ~list_resources~
 returns a list of devices, which pyvisa find. For example:
 
 #+RESULTS: list_resources
-: ('USB0::26198::2100::1485061822::0::INSTR',)
+: USB0::26198::2100::1485061822::0::INSTR
 
 
 An empty list is returned, when no device is found.

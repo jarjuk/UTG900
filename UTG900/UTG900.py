@@ -29,6 +29,13 @@ class UTG962:
          """
 
          _rm = pyvisa.ResourceManager()
+         @staticmethod
+         def list_resources():
+             return UTG962._rm.list_resources()
+         
+         # def list_resources(self):
+         #     return UTG962._rm.list_resources()
+             
 
          # Construct && close
          def __init__( self, addr=ADDR,  debug = False ):
@@ -319,7 +326,7 @@ class UTG962:
                       raise ValueError(msg)
                 return ( match.group('value'), match.group('unit') )
 
-         # Commands
+         # API ---> 
          def reset(self):
               # Known state
               self.ch = [ False, False ]
@@ -441,9 +448,10 @@ class UTG962:
              
          def getName(self):
             return( self.query( "*IDN?"))
-         def list_resources(self):
-             return UTG962._rm.list_resources()
 
+def list_resources():
+    return UTG962._rm.list_resources()
+        
 # ------------------------------------------------------------------
 # State && Global
 helpProps = {
@@ -561,10 +569,10 @@ def cmdHelp( command=None ):
 def invalid( msg):
     print( msg )
     
-def listResources():
-     rm = pyvisa.ResourceManager()
-     print( rm.list_resources() )
-     rm.close()
+# def listResources():
+#      rm = pyvisa.ResourceManager()
+#      print( rm.list_resources() )
+#      rm.close()
 
 def promptValue( prompt, key=None, cmds=None, validValues=None ):
     ans = None
@@ -684,7 +692,7 @@ def main(_argv):
         elif cmd == 'reset':
             sgen().reset()
         elif cmd == 'list_resources':
-            resourses = UTG962._rm.list_resources()
+            resourses = list_resources()
             if len(resourses) == 1:
                 print( resourses[0] )
             else:

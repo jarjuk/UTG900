@@ -1,8 +1,12 @@
 
 ## 0.0.5-SNAPSHOT/20210329-09:06:54
 
+- Issues fixed:
+  - README.org: added toc
+  - README.org: first version of API usage
+
 - Known issues:
-  - README.org: missing API -usage documentation
+  - README.org: API -usage documentation should be enhanced
   - `UTG900.py arb` implementation not working
   - `UTG900.py arb` waveform file format documentation missing
 
