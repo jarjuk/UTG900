@@ -73,7 +73,7 @@ See section =commands and parameters= below for details
 
 **** Import package and show version number
 
- #+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python* :export both
+ #+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python* :exports both
  import UTG900
  print( UTG900.version())
  #+END_SRC
@@ -85,7 +85,7 @@ See section =commands and parameters= below for details
  : 0.0.5-SNAPSHOT
 
 ****  List resources
- #+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python*
+ #+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python* :exports both
  print( UTG900.list_resources())
  #+END_SRC
 
@@ -95,12 +95,13 @@ See section =commands and parameters= below for details
 
 ****  Create  =UTG900.UTG962= object
 
- #+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python* 
- sgen = UTG900.UTG962()
+ #+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python*  :exports both
+ ADDR = 'USB0::26198::2100::1485061822::0::INSTR'
+ sgen = UTG900.UTG962(addr=ADDR)
  #+END_SRC
 
  #+RESULTS:
- : WARNING:absl:Successfully connected  'USB0::0x6656::0x0834::1485061822::INSTR' with 'UNI-T Technologies,UTG900,1485061822,1.08'
+ : WARNING:absl:Successfully connected  'USB0::26198::2100::1485061822::0::INSTR' with 'UNI-T Technologies,UTG900,1485061822,1.08'
 
 ****  Send =reset=
  #+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python*

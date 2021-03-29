@@ -3,7 +3,7 @@ import setuptools
 with open("VERSION", "r") as fh:
     version = fh.read().rstrip()
 
-scripts =[ "bin/utg900.sh" ]
+scripts =[ ]
 name="utg900"
 
 print( "version", version, ", packages", setuptools.find_packages())
