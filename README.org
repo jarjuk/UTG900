@@ -349,106 +349,103 @@ Runs on python3 using ~absl-py~ and ~pyvisa-py~ packages. Screenshot
 used ~convert~ -command from ~imagemagick~ tool.
 
 
-* Install
+* Installation
+:PROPERTIES:
+:header-args:bash: :dir  tmp
+:END:
 
-** Create =setup.py= package
+
+** Clone repo ~https://github.com/jarjuk/UTG900~
+
 
 #+BEGIN_SRC bash :eval no-export :results output
-cat VERSION
+git clone https://github.com/jarjuk/UTG900
 #+END_SRC
 
 #+RESULTS:
-: 0.0.3
 
+** Show version
 
-Ref: https://packaging.python.org/guides/distributing-packages-using-setuptools/
+#+BEGIN_SRC bash :eval no-export :results output
+cat UTG900/VERSION
+#+END_SRC
 
-#+BEGIN_SRC bash :eval no-export :results output :exports code
-python3 setup.py  sdist  bdist_wheel
+#+RESULTS:
+: 0.0.4-SNAPSHOT
+
+** Show releases notes
+
+#+BEGIN_SRC bash :eval no-export :results output
+cat UTG900/RELEASES.md
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
-version 0.0.3 , packages ['UTG900']
-running sdist
-running egg_info
-writing utg900.egg-info/PKG-INFO
-writing dependency_links to utg900.egg-info/dependency_links.txt
-writing top-level names to utg900.egg-info/top_level.txt
-reading manifest file 'utg900.egg-info/SOURCES.txt'
-writing manifest file 'utg900.egg-info/SOURCES.txt'
-running check
-creating utg900-0.0.3
-creating utg900-0.0.3/UTG900
-creating utg900-0.0.3/utg900.egg-info
-copying files to utg900-0.0.3...
-copying setup.py -> utg900-0.0.3
-copying UTG900/UTG900.py -> utg900-0.0.3/UTG900
-copying UTG900/__init__.py -> utg900-0.0.3/UTG900
-copying UTG900/../RELEASES.md -> utg900-0.0.3/UTG900/..
-copying UTG900/../VERSION -> utg900-0.0.3/UTG900/..
-copying utg900.egg-info/PKG-INFO -> utg900-0.0.3/utg900.egg-info
-copying utg900.egg-info/SOURCES.txt -> utg900-0.0.3/utg900.egg-info
-copying utg900.egg-info/dependency_links.txt -> utg900-0.0.3/utg900.egg-info
-copying utg900.egg-info/top_level.txt -> utg900-0.0.3/utg900.egg-info
-Writing utg900-0.0.3/setup.cfg
-Creating tar archive
-removing 'utg900-0.0.3' (and everything under it)
-running bdist_wheel
-running build
-running build_py
-installing to build/bdist.linux-x86_64/wheel
-running install
-running install_lib
-creating build/bdist.linux-x86_64/wheel
-creating build/bdist.linux-x86_64/wheel/UTG900
-copying build/lib/UTG900/__init__.py -> build/bdist.linux-x86_64/wheel/UTG900
-copying build/lib/UTG900/UTG900.py -> build/bdist.linux-x86_64/wheel/UTG900
-copying build/lib/VERSION -> build/bdist.linux-x86_64/wheel
-copying build/lib/RELEASES.md -> build/bdist.linux-x86_64/wheel
-running install_egg_info
-Copying utg900.egg-info to build/bdist.linux-x86_64/wheel/utg900-0.0.3-py3.9.egg-info
-running install_scripts
-creating build/bdist.linux-x86_64/wheel/utg900-0.0.3.dist-info/WHEEL
-creating 'dist/utg900-0.0.3-py3-none-any.whl' and adding 'build/bdist.linux-x86_64/wheel' to it
-adding 'RELEASES.md'
-adding 'VERSION'
-adding 'UTG900/UTG900.py'
-adding 'UTG900/__init__.py'
-adding 'utg900-0.0.3.dist-info/METADATA'
-adding 'utg900-0.0.3.dist-info/WHEEL'
-adding 'utg900-0.0.3.dist-info/top_level.txt'
-adding 'utg900-0.0.3.dist-info/RECORD'
-removing build/bdist.linux-x86_64/wheel
+
+## 0.0.4-SNAPSHOT/20210328-23:09:06
+
+- Issues fixed
+  - Document fixes: 
+    - document order of command parameters
+    - document interactive mode
+    - on-line help: added `--addr` -documentation
+    - added DEVELOPMENT.org (moved delivery section from README.org)
+
+- Features added:
+  - `UTG900.py list_resources` -command added
+  - `UTG900.py version`  -command added
+
+- Known issues:
+  - README.org: missing API -usage documentation
+  
+
+## 0.0.3/20210328-23:08:07
+
+- README.org: installation
+
+## 0.0.2/20210328-23:01:53
+
+
+
+## 0.0.1/20210328-22:51:12
+
+,* Initial release
+
+## 0.0.0/18.00.2013
+
+,* Base release
+
 #+end_example
 
 
-** Install distribution package
+
+
+** Check installation
 
 #+BEGIN_SRC bash :eval no-export :results output
-VERSION_FILE=$(ls -1tr dist/*.tar.gz | tail -1| cut -f2)
-echo VERSION_FILE=$VERSION_FILE
-python3 -m pip install --user $VERSION_FILE  && echo installed $VERSION_FILE
+UTG900/UTG900/UTG900.py version
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-VERSION_FILE=dist/utg900-0.0.3.tar.gz
-Processing ./dist/utg900-0.0.3.tar.gz
-Building wheels for collected packages: utg900
-  Building wheel for utg900 (setup.py): started
-  Building wheel for utg900 (setup.py): finished with status 'done'
-  Created wheel for utg900: filename=utg900-0.0.3-py3-none-any.whl size=6927 sha256=2119925b02a9cfffb7ed4766217aeaf9e25dedc5b6037ba563c008796da2ec9f
-  Stored in directory: /home/jj/.cache/pip/wheels/4f/a5/ac/26a6b05bd6322efe5983535804c48cef89b17941d95806a5e2
-Successfully built utg900
-Installing collected packages: utg900
-  Attempting uninstall: utg900
-    Found existing installation: utg900 0.0.2
-    Uninstalling utg900-0.0.2:
-      Successfully uninstalled utg900-0.0.2
-Successfully installed utg900-0.0.3
-installed dist/utg900-0.0.3.tar.gz
-#+end_example
+: 0.0.4-SNAPSHOT
+
+** Check list resources 
+
+#+BEGIN_SRC bash :eval no-export :results output
+UTG900/UTG900/UTG900.py list_resources
+#+END_SRC
+
+#+RESULTS:
+: USB0::26198::2100::1485061822::0::INSTR
+
+
+** Use it
+
+#+BEGIN_SRC bash :eval no-export :results output
+UTG900/UTG900/UTG900.py --addr $(UTG900/UTG900/UTG900.py list_resources) reset
+#+END_SRC
+
+#+RESULTS:
 
 
  

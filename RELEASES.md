@@ -7,6 +7,7 @@
     - document interactive mode
     - on-line help: added `--addr` -documentation
     - added DEVELOPMENT.org (moved delivery section from README.org)
+    - installation: rewritten, based on git clone
 
 - Features added:
   - `UTG900.py list_resources` -command added
