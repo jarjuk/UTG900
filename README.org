@@ -1,11 +1,42 @@
 * UTG-900 - Tool to control UNIT-T UTG900 Waveform generator $Release:0.0.5-SNAPSHOT$
+:PROPERTIES:
+:TOC:      :include all
+:END:
+
+:CONTENTS:
+- [[#utg-900---tool-to-control-unit-t-utg900-waveform-generator-release005-snapshot][UTG-900 - Tool to control UNIT-T UTG900 Waveform generator $Release:0.0.5-SNAPSHOT$]]
+  - [[#usage][Usage]]
+    - [[#interactive-usage][Interactive usage]]
+    - [[#command-line-parameter-usage][Command line parameter usage]]
+    - [[#api-usage][API usage]]
+  - [[#commands-and-parameters][Commands and parameters]]
+    - [[#command-][Command ?]]
+    - [[#command-screen---take-screenshot][Command screen - take screenshot]]
+    - [[#command-reset---send-reset-command-to-utg900][Command reset - Send reset command to UTG900]]
+    - [[#command-sine---generate-sive-wave][Command sine - Generate sive wave]]
+    - [[#command-square---generate-square-wave][Command square - Generate square wave]]
+    - [[#command-pulse---generate-pulse-wave][Command pulse - Generate pulse wave]]
+    - [[#command-arb---upload-wave-file-and-use-it-to-generate-wave][Command arb - Upload wave file and use it to generate wave]]
+    - [[#command-on-and-off---switch-channel-onoff][Command on and off - Switch channel on/off]]
+    - [[#command-list_resources---list-pyvisa-resourses][Command list_resources - List pyvisa resourses]]
+    - [[#command-version---output-version-number][Command version - Output version number]]
+  - [[#requirements][Requirements]]
+- [[#installation][Installation]]
+  - [[#clone-repo-httpsgithubcomjarjukutg900][Clone repo https://github.com/jarjuk/UTG900]]
+  - [[#show-version][Show version]]
+  - [[#show-releases-notes][Show releases notes]]
+  - [[#check-installation][Check installation]]
+  - [[#check-list-resources][Check list resources]]
+  - [[#use-it][Use it]]
+:END:
+
 
 ** Usage
 :PROPERTIES:
 :header-args:bash: :dir  UTG900
 :END:
 
-*** Interactive mode
+*** Interactive usage
 
 Command
 
@@ -21,8 +52,25 @@ Command [q=quit,?=help] >
 
 - Help, and list of commands is presented with ~?~.
 - Giving ~q~ exits the program
-- Entering command name to the propts ask for command parameters
+- Giving command name invokes sequence asking for command parameters
 
+
+*** Command line parameter usage
+
+#+BEGIN_SRC bash :eval no-export :results output :exports results
+./UTG900.py ? |  grep 'Usage:'
+#+END_SRC
+
+#+RESULTS:
+: Usage: UTG900.py [options] [commands and parameters] 
+
+See section =commands and parameters= below for details
+
+*** API usage
+
+*TBD*
+
+** Commands and parameters
 
 *** Command ~?~
 
@@ -461,7 +509,7 @@ UTG900/UTG900/UTG900.py --addr $(UTG900/UTG900/UTG900.py list_resources)
  
 * Fin                                                              :noexport:
 
-** Emacs variables
+** Emacs variables                                                 :noexport:
 
    #+RESULTS:
 
