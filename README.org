@@ -7,7 +7,7 @@
 - [[#utg-900---tool-to-control-unit-t-utg900-waveform-generator-release005-snapshot][UTG-900 - Tool to control UNIT-T UTG900 Waveform generator $Release:0.0.5-SNAPSHOT$]]
   - [[#usage][Usage]]
     - [[#interactive-usage][Interactive usage]]
-    - [[#command-line-parameter-usage][Command line parameter usage]]
+    - [[#command-line-usage][Command line usage]]
     - [[#api-usage][API usage]]
       - [[#import-package-and-show-version-number][Import package and show version number]]
       - [[#list-resources][List resources]]
@@ -15,16 +15,16 @@
       - [[#send-reset][Send reset]]
       - [[#switch-channel-on-and-off][Switch channel on() and off]]
   - [[#commands-and-parameters][Commands and parameters]]
-    - [[#command-][Command ?]]
-    - [[#command-screen---take-screenshot][Command screen - take screenshot]]
-    - [[#command-reset---send-reset-command-to-utg900][Command reset - Send reset command to UTG900]]
-    - [[#command-sine---generate-sive-wave][Command sine - Generate sive wave]]
-    - [[#command-square---generate-square-wave][Command square - Generate square wave]]
-    - [[#command-pulse---generate-pulse-wave][Command pulse - Generate pulse wave]]
-    - [[#command-arb---upload-wave-file-and-use-it-to-generate-wave][Command arb - Upload wave file and use it to generate wave]]
-    - [[#command-on-and-off---switch-channel-onoff][Command on and off - Switch channel on/off]]
-    - [[#command-list_resources---list-pyvisa-resourses][Command list_resources - List pyvisa resourses]]
-    - [[#command-version---output-version-number][Command version - Output version number]]
+    - [[#][?]]
+    - [[#screen---take-screenshot][screen - take screenshot]]
+    - [[#reset---send-reset-command-to-utg900][reset - Send reset command to UTG900]]
+    - [[#sine---generate-sive-wave][sine - Generate sive wave]]
+    - [[#square---generate-square-wave][square - Generate square wave]]
+    - [[#pulse---generate-pulse-wave][pulse - Generate pulse wave]]
+    - [[#arb---upload-wave-file-and-use-it-to-generate-wave][arb - Upload wave file and use it to generate wave]]
+    - [[#on-and-off---switch-channel-onoff][on and off - Switch channel on/off]]
+    - [[#list_resources---list-pyvisa-resourses][list_resources - List pyvisa resourses]]
+    - [[#version---output-version-number][version - Output version number]]
   - [[#requirements][Requirements]]
 - [[#installation][Installation]]
   - [[#clone-repo-httpsgithubcomjarjukutg900][Clone repo https://github.com/jarjuk/UTG900]]
@@ -551,11 +551,16 @@ UTG900/UTG900/UTG900.py list_resources
 
 ** Use it
 
-To connect to your device, and to run interactively
+Note resource address from above and pass it to ~--addr~ -option, or
+simply run
 
 #+BEGIN_SRC bash :eval no-export :results output
 UTG900/UTG900/UTG900.py --addr $(UTG900/UTG900/UTG900.py list_resources)
 #+END_SRC
+
+to connect to your device, and start interactivive session. For commad
+line use, pass commands and options documented above, in [[Commands and
+parameters]] section
 
 
  
