@@ -1,5 +1,11 @@
 
 ## 0.0.5-SNAPSHOT/20210329-09:06:54
+
+- Known issues:
+  - README.org: missing API -usage documentation
+  - `UTG900.py arb` implementation not working
+  - `UTG900.py arb` waveform file format documentation missing
+
 ## 0.0.4/20210329-09:06:37
 
 - Issues fixed
@@ -16,6 +22,7 @@
 
 - Known issues:
   - README.org: missing API -usage documentation
+
   
 
 ## 0.0.3/20210328-23:08:07

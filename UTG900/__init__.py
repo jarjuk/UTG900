@@ -1,2 +1,2 @@
-from .UTG900 import UTG962
+from .UTG900 import UTG962, version
 

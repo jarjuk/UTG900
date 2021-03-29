@@ -9,10 +9,9 @@ import pyvisa
 import re
 from time import sleep
 
-
+ADDR= "USB0::0x6656::0x0834::1485061822::INSTR"
 flags.DEFINE_integer('debug', -1, '-3=fatal, -1=warning, 0=info, 1=debug')
-flags.DEFINE_string('addr', "USB0::0x6656::0x0834::1485061822::INSTR", "UTG900 pyvisa resource address")
-## flags.DEFINE_string('addr', "USB0::0x6656::0x0834::12312::INSTR", "UTG900 pyvisa resource address")
+flags.DEFINE_string('addr', ADDR, "UTG900 pyvisa resource address")
 flags.DEFINE_string('captureDir', "pics", "Capture directory")
 
 CMD="UTG900.py"
@@ -32,7 +31,7 @@ class UTG962:
          _rm = pyvisa.ResourceManager()
 
          # Construct && close
-         def __init__( self, addr,  debug = False ):
+         def __init__( self, addr=ADDR,  debug = False ):
             self.sgen = UTG962._rm.open_resource(addr)
             self.debug = debug
             if self.debug:
@@ -169,7 +168,14 @@ class UTG962:
                   f.write( sShot)
              # Need to flip it over && convert to ext
              self.dibToImage( filePathDib, filePath )
-
+         def ilWriteFile( self, filePath):
+             """Expect to be in Arb/WaveFile waitin for file loaction &&
+             updaload"""
+             self.ilFileLocation( "External")
+             with open( filePath) as fh:
+                 lines = fh.readlines()
+                 for line in lines:
+                     self.write( line )
          def ilConf( self, wave ):
              waveMap  = {
                 "Freq":   "1",
@@ -200,6 +206,17 @@ class UTG962:
                 "Phase": "4",
                 "Duty": "5",
                 "Page Down": "6",
+             }
+             self.llFKey( val=wave, keyMap = waveMap )
+
+         def ilWaveArbProps( self, wave ):
+             """Arb Wave properties"""
+             waveMap  = {
+                "WaveFile": "1",
+                "Freq": "2",
+                "Amp": "3",
+                "Offset":  "4",
+                "Phase": "5",
              }
              self.llFKey( val=wave, keyMap = waveMap )
 
@@ -261,6 +278,12 @@ class UTG962:
                 "V": "2",
              }
              self.llFKey( val=unit, keyMap = offsetUnit )
+         def ilFileLocation( self, location ):
+             fileLocation  = {
+                 # "Internal": "1",
+                 "External": "2",
+             }
+             self.llFKey( val=location, keyMap=fileLocation )
          def ilUtilityCh( self, ch ):
              chSelect  = {
                 1: "1",
@@ -341,13 +364,13 @@ class UTG962:
              self.ilChooseChannel( ch )
              # At this point correct channel selected
              self.ilWave1( wave )
-             # Frequencey (sine, square, pulse)
+             # Frequencey (sine, square, pulse,arb)
              if freq is not None and not not freq:
                  # Without down would toggle Periosd
                  self.llDown()
                  self.ilWave1Props( "Freq")
                  self.ilFreq( *self.valUnit( freq ) )
-             # Amplification (sine, square, pulse)
+             # Amplification (sine, square, pulse, arb)
              if amp is not None and not not amp:
                  logging.info( "amp value:'{}'".format(amp))
                  self.ilWave1Props( "Amp")
@@ -381,10 +404,45 @@ class UTG962:
                  self.ilWave2Props( "Page Up")
              # Activate
              self.on(ch)
+
+         def arbGenerate( self, ch=1, wave="arb", filePath="tmp/apu.csv", freq=None, amp=None,  offset=None, phase=None ):
+             """Arb generation
+             """
+             # Deactivate
+             self.off(ch)
+             # Start config
+             self.ilChooseChannel( ch )
+             # At this point correct channel selected
+             self.ilWave1( wave )
+             # Upload file
+             self.llDown()
+             self.ilWaveArbProps( "WaveFile")
+             self.ilWriteFile( filePath = filePath )
+             # Frequencey (sine, square, pulse,arb)
+             if freq is not None and not not freq:
+                 self.ilWaveArbProps( "Freq")
+                 self.ilFreq( *self.valUnit( freq ) )
+                 self.llDown()
+             # Amplification (sine, square, pulse, arb)
+             if amp is not None and not not amp:
+                 logging.info( "amp value:'{}'".format(amp))
+                 self.ilWaveArbProps( "Amp")
+                 self.ilAmp( *self.valUnit( amp ) )
+             # Offset (sine, square, pulse)
+             if offset is not None and not not offset:
+                 self.ilWaveArbProps( "Offset")
+                 self.ilOffset( *self.valUnit(offset))
+             # Phase (sine, square, pulse)
+             if phase is not None and not not phase:
+                 self.ilWaveArbProps( "Phase")
+                 self.ilPhase( *self.valUnit( phase ))
+             # Activate
+             self.on(ch)
+             
          def getName(self):
             return( self.query( "*IDN?"))
          def list_resources(self):
-             return self.rm.list_resources()
+             return UTG962._rm.list_resources()
 
 # ------------------------------------------------------------------
 # State && Global
@@ -407,6 +465,10 @@ sineProps = onOffProps | {
     'phase' :  "Phase [deg]",
 }
         
+arbProps = sineProps | {
+    'filePath'  :   "Path to waveform file",
+}
+        
 squareProps = sineProps | {
     'duty'  :   "Duty [%]",
 }
@@ -420,6 +482,7 @@ subMenu = {
     "sine"            : sineProps,
     "square"          : squareProps,
     "pulse"           : pulseProps,
+    "arb"             : arbProps,    
     "on"              : onOffProps,
     "off"             : onOffProps,
     "screen"          :  screenCaptureProps,
@@ -436,6 +499,7 @@ mainMenu = {
     "sine"           : "Generate sine -wave on channel 1|2",
     "square"         : "Generate square -wave on channel 1|2",
     "pulse"          : "Generate pulse -wave on channel 1|2",
+    "arb"            : "Upload wave file and use it to generate wave on channel 1|2",
     "on"             : "Switch on channel 1|2",
     "off"            : "Switch off channel 1|2",
     "reset"          : "Send reset to UTG900 signal generator",
@@ -599,6 +663,12 @@ def main(_argv):
             }
             logging.info( "sine: propVals:{}".format(propVals))
             sgen().generate( wave="sine", **propVals )
+        elif cmd == 'arb':
+            propVals = {
+                k: promptValue(v,key=k,cmds=cmds) for k,v in arbProps.items()
+            }
+            logging.info( "arb: propVals:{}".format(propVals))
+            sgen().arbGenerate( wave="arb", **propVals )
         elif cmd == 'pulse':
             propVals = {
                 k: promptValue(v,key=k,cmds=cmds) for k,v in pulseProps.items()

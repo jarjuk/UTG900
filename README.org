@@ -37,7 +37,7 @@ shows commad usage
 
 #+RESULTS: help
 #+begin_example
-UTG900.py - 0.0.4-SNAPSHOT: Tool to control UNIT-T UTG900 Waveform generator
+UTG900.py - 0.0.5-SNAPSHOT: Tool to control UNIT-T UTG900 Waveform generator
 
 Usage: UTG900.py [options] [commands and parameters] 
 
@@ -48,6 +48,7 @@ Commands:
            sine  : Generate sine -wave on channel 1|2
          square  : Generate square -wave on channel 1|2
           pulse  : Generate pulse -wave on channel 1|2
+            arb  : Upload wave file and use it to generate wave on channel 1|2
              on  : Switch on channel 1|2
             off  : Switch off channel 1|2
           reset  : Send reset to UTG900 signal generator
@@ -254,6 +255,52 @@ Notice:
 
 
 
+*** Command ~arb~ - Upload wave file and use it to generate wave
+
+Options of  ~arb~ -command
+
+#+BEGIN_SRC bash :eval no-export :results output :exports both
+./UTG900.py ? command=arb
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+arb - Upload wave file and use it to generate wave on channel 1|2
+
+        ch  : Channel 1,2 to switch on/off
+      freq  : Frequency [uHz|mHz|kHz|MHz]
+       amp  : Amplitude [mVpp|Vpp|mVrms|Vrms]
+    offset  : Offset [mV|V]
+     phase  : Phase [deg]
+  filePath  : Path to waveform file
+
+Notice:
+- parameters MUST BE given in the order listed above
+- parameters are optional and they MAY BE left out
+#+end_example
+
+*TDB* documenation missing
+
+#+BEGIN_SRC bash :eval no-export :results output :export results
+cat ../data/example1.csv
+#+END_SRC
+
+#+RESULTS:
+: /home/jj/work/UTG900/UTG900
+: 1,0.2
+: 2,0.1
+: 3,0.4
+
+*TBD* this does not work
+
+#+BEGIN_SRC bash :eval no-export :results output
+./UTG900.py --debug 1  arb ch=1 filePath='../data/example1.csv'
+#+END_SRC
+
+#+RESULTS:
+
+
+
 *** Command ~on~ and ~off~ - Switch channel on/off
 
 Options of  ~on~ -command
@@ -375,52 +422,13 @@ cat UTG900/VERSION
 
 ** Show releases notes
 
-#+BEGIN_SRC bash :eval no-export :results output
+#+BEGIN_SRC bash :eval no :results output
 cat UTG900/RELEASES.md
 #+END_SRC
 
-#+RESULTS:
-#+begin_example
-
-## 0.0.4-SNAPSHOT/20210328-23:09:06
-
-- Issues fixed
-  - Document fixes: 
-    - document order of command parameters
-    - document interactive mode
-    - on-line help: added `--addr` -documentation
-    - added DEVELOPMENT.org (moved delivery section from README.org)
-
-- Features added:
-  - `UTG900.py list_resources` -command added
-  - `UTG900.py version`  -command added
-
-- Known issues:
-  - README.org: missing API -usage documentation
-  
-
-## 0.0.3/20210328-23:08:07
-
-- README.org: installation
-
-## 0.0.2/20210328-23:01:53
-
-
-
-## 0.0.1/20210328-22:51:12
-
-,* Initial release
-
-## 0.0.0/18.00.2013
-
-,* Base release
-
-#+end_example
-
-
-
-
 ** Check installation
+
+Run 
 
 #+BEGIN_SRC bash :eval no-export :results output
 UTG900/UTG900/UTG900.py version
@@ -430,6 +438,8 @@ UTG900/UTG900/UTG900.py version
 : 0.0.4-SNAPSHOT
 
 ** Check list resources 
+
+Run
 
 #+BEGIN_SRC bash :eval no-export :results output
 UTG900/UTG900/UTG900.py list_resources
@@ -441,11 +451,11 @@ UTG900/UTG900/UTG900.py list_resources
 
 ** Use it
 
-#+BEGIN_SRC bash :eval no-export :results output
-UTG900/UTG900/UTG900.py --addr $(UTG900/UTG900/UTG900.py list_resources) reset
-#+END_SRC
+To connect to your device, and to run interactively
 
-#+RESULTS:
+#+BEGIN_SRC bash :eval no-export :results output
+UTG900/UTG900/UTG900.py --addr $(UTG900/UTG900/UTG900.py list_resources)
+#+END_SRC
 
 
  

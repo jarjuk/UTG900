@@ -1,6 +1,8 @@
 2021-03-29  jj  <jj@santtu>
 
 	* UTG900/UTG900.py (mainMenuHelp): added version output
+	(UTG962.arbGenerate): added
+	(UTG962.ilWriteFile): added
 
 	* DEVELOPMENT.org: added pyinstaller section
 
