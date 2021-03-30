@@ -1,10 +1,10 @@
-* UTG-900 - Tool to control UNIT-T UTG900 Waveform generator $Release:0.0.5$
+* UTG-900 - Tool to control UNIT-T UTG900 Waveform generator $Release:0.0.6-SNAPSHOT$
 :PROPERTIES:
 :TOC:      :include all
 :END:
 
 :CONTENTS:
-- [[#utg-900---tool-to-control-unit-t-utg900-waveform-generator-release005-snapshot][UTG-900 - Tool to control UNIT-T UTG900 Waveform generator $Release:0.0.5$]]
+- [[#utg-900---tool-to-control-unit-t-utg900-waveform-generator-release005-snapshot][UTG-900 - Tool to control UNIT-T UTG900 Waveform generator $Release:0.0.6-SNAPSHOT$]]
   - [[#usage][Usage]]
     - [[#interactive-usage][Interactive usage]]
     - [[#command-line-usage][Command line usage]]
