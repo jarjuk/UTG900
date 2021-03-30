@@ -15,7 +15,7 @@
       - [[#send-reset][Send reset]]
       - [[#switch-channel-on-and-off][Switch channel on() and off]]
   - [[#commands-and-parameters][Commands and parameters]]
-    - [[#][?]]
+    - [[#---get-usage-help][? - get usage help]]
     - [[#screen---take-screenshot][screen - take screenshot]]
     - [[#reset---send-reset-command-to-utg900][reset - Send reset command to UTG900]]
     - [[#sine---generate-sive-wave][sine - Generate sive wave]]
@@ -33,6 +33,7 @@
   - [[#check-installation][Check installation]]
   - [[#check-list-resources][Check list resources]]
   - [[#use-it][Use it]]
+- [[#releases][Releases]]
 :END:
 
 
