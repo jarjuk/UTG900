@@ -96,7 +96,7 @@ pyinstaller UTG900/UTG900.py --onefile
  #+END_SRC
 
  #+RESULTS:
- : 0.0.5-SNAPSHOT
+ : 0.0.5
 
 
  Ref: https://packaging.python.org/guides/distributing-packages-using-setuptools/
@@ -107,7 +107,7 @@ pyinstaller UTG900/UTG900.py --onefile
 
  #+RESULTS:
  #+begin_example
- version 0.0.5-SNAPSHOT , packages ['UTG900']
+ version 0.0.5 , packages ['UTG900']
  running sdist
  running egg_info
  writing utg900.egg-info/PKG-INFO
@@ -116,25 +116,28 @@ pyinstaller UTG900/UTG900.py --onefile
  reading manifest file 'utg900.egg-info/SOURCES.txt'
  writing manifest file 'utg900.egg-info/SOURCES.txt'
  running check
- creating utg900-0.0.5-SNAPSHOT
- creating utg900-0.0.5-SNAPSHOT/UTG900
- creating utg900-0.0.5-SNAPSHOT/utg900.egg-info
- copying files to utg900-0.0.5-SNAPSHOT...
- copying setup.py -> utg900-0.0.5-SNAPSHOT
- copying UTG900/UTG900.py -> utg900-0.0.5-SNAPSHOT/UTG900
- copying UTG900/__init__.py -> utg900-0.0.5-SNAPSHOT/UTG900
- copying UTG900/../RELEASES.md -> utg900-0.0.5-SNAPSHOT/UTG900/..
- copying UTG900/../VERSION -> utg900-0.0.5-SNAPSHOT/UTG900/..
- copying utg900.egg-info/PKG-INFO -> utg900-0.0.5-SNAPSHOT/utg900.egg-info
- copying utg900.egg-info/SOURCES.txt -> utg900-0.0.5-SNAPSHOT/utg900.egg-info
- copying utg900.egg-info/dependency_links.txt -> utg900-0.0.5-SNAPSHOT/utg900.egg-info
- copying utg900.egg-info/top_level.txt -> utg900-0.0.5-SNAPSHOT/utg900.egg-info
- Writing utg900-0.0.5-SNAPSHOT/setup.cfg
+ creating utg900-0.0.5
+ creating utg900-0.0.5/UTG900
+ creating utg900-0.0.5/utg900.egg-info
+ copying files to utg900-0.0.5...
+ copying setup.py -> utg900-0.0.5
+ copying UTG900/UTG900.py -> utg900-0.0.5/UTG900
+ copying UTG900/__init__.py -> utg900-0.0.5/UTG900
+ copying UTG900/../RELEASES.md -> utg900-0.0.5/UTG900/..
+ copying UTG900/../VERSION -> utg900-0.0.5/UTG900/..
+ copying utg900.egg-info/PKG-INFO -> utg900-0.0.5/utg900.egg-info
+ copying utg900.egg-info/SOURCES.txt -> utg900-0.0.5/utg900.egg-info
+ copying utg900.egg-info/dependency_links.txt -> utg900-0.0.5/utg900.egg-info
+ copying utg900.egg-info/top_level.txt -> utg900-0.0.5/utg900.egg-info
+ Writing utg900-0.0.5/setup.cfg
  Creating tar archive
- removing 'utg900-0.0.5-SNAPSHOT' (and everything under it)
+ removing 'utg900-0.0.5' (and everything under it)
  running bdist_wheel
  running build
  running build_py
+ copying UTG900/UTG900.py -> build/lib/UTG900
+ copying UTG900/../VERSION -> build/lib/UTG900/..
+ copying UTG900/../RELEASES.md -> build/lib/UTG900/..
  installing to build/bdist.linux-x86_64/wheel
  running install
  running install_lib
@@ -145,18 +148,18 @@ pyinstaller UTG900/UTG900.py --onefile
  copying build/lib/VERSION -> build/bdist.linux-x86_64/wheel
  copying build/lib/RELEASES.md -> build/bdist.linux-x86_64/wheel
  running install_egg_info
- Copying utg900.egg-info to build/bdist.linux-x86_64/wheel/utg900-0.0.5_SNAPSHOT-py3.9.egg-info
+ Copying utg900.egg-info to build/bdist.linux-x86_64/wheel/utg900-0.0.5-py3.9.egg-info
  running install_scripts
- creating build/bdist.linux-x86_64/wheel/utg900-0.0.5_SNAPSHOT.dist-info/WHEEL
- creating 'dist/utg900-0.0.5_SNAPSHOT-py3-none-any.whl' and adding 'build/bdist.linux-x86_64/wheel' to it
+ creating build/bdist.linux-x86_64/wheel/utg900-0.0.5.dist-info/WHEEL
+ creating 'dist/utg900-0.0.5-py3-none-any.whl' and adding 'build/bdist.linux-x86_64/wheel' to it
  adding 'RELEASES.md'
  adding 'VERSION'
  adding 'UTG900/UTG900.py'
  adding 'UTG900/__init__.py'
- adding 'utg900-0.0.5_SNAPSHOT.dist-info/METADATA'
- adding 'utg900-0.0.5_SNAPSHOT.dist-info/WHEEL'
- adding 'utg900-0.0.5_SNAPSHOT.dist-info/top_level.txt'
- adding 'utg900-0.0.5_SNAPSHOT.dist-info/RECORD'
+ adding 'utg900-0.0.5.dist-info/METADATA'
+ adding 'utg900-0.0.5.dist-info/WHEEL'
+ adding 'utg900-0.0.5.dist-info/top_level.txt'
+ adding 'utg900-0.0.5.dist-info/RECORD'
  removing build/bdist.linux-x86_64/wheel
  #+end_example
 
@@ -171,23 +174,21 @@ pyinstaller UTG900/UTG900.py --onefile
 
  #+RESULTS:
  #+begin_example
- VERSION_FILE=dist/utg900-0.0.5-SNAPSHOT.tar.gz
- Processing ./dist/utg900-0.0.5-SNAPSHOT.tar.gz
+ VERSION_FILE=dist/utg900-0.0.5.tar.gz
+ Processing ./dist/utg900-0.0.5.tar.gz
  Building wheels for collected packages: utg900
    Building wheel for utg900 (setup.py): started
    Building wheel for utg900 (setup.py): finished with status 'done'
-   Created wheel for utg900: filename=utg900-0.0.5_SNAPSHOT-py3-none-any.whl size=8362 sha256=69f681b0926e621f76369272aa6dacd6b602ecb6dfe7a9b77977cc23a48af2dc
-   Stored in directory: /home/jj/.cache/pip/wheels/96/e3/a9/34dfe14740e9d4040f28bdd5151a84607976c73eaa9da4caed
- Failed to build utg900
+   Created wheel for utg900: filename=utg900-0.0.5-py3-none-any.whl size=8268 sha256=6bd0dbaa94d57a531ee4e35f0e93174a143fd61ab27ddfb0ac7de90a6bb9cde7
+   Stored in directory: /home/jj/.cache/pip/wheels/8b/d4/a4/8fa6e2398cb41a464b30a0af64a7b4ccad5af3848dc7edf147
+ Successfully built utg900
  Installing collected packages: utg900
    Attempting uninstall: utg900
-     Found existing installation: utg900 0.0.4-SNAPSHOT
-     Uninstalling utg900-0.0.4-SNAPSHOT:
-       Successfully uninstalled utg900-0.0.4-SNAPSHOT
-     Running setup.py install for utg900: started
-     Running setup.py install for utg900: finished with status 'done'
- Successfully installed utg900-0.0.5-SNAPSHOT
- installed dist/utg900-0.0.5-SNAPSHOT.tar.gz
+     Found existing installation: utg900 0.0.5-SNAPSHOT
+     Uninstalling utg900-0.0.5-SNAPSHOT:
+       Successfully uninstalled utg900-0.0.5-SNAPSHOT
+ Successfully installed utg900-0.0.5
+ installed dist/utg900-0.0.5.tar.gz
  #+end_example
 
 
@@ -199,8 +200,8 @@ pyinstaller UTG900/UTG900.py --onefile
  #+END_SRC
 
  #+RESULTS:
- : [master 5bfc826] ## 0.0.5-SNAPSHOT/20210329-09:06:54
- :  3 files changed, 3 insertions(+), 2 deletions(-)
+ : [master eddee62] ## 0.0.6-SNAPSHOT/20210330-10:09:33
+ :  3 files changed, 4 insertions(+), 3 deletions(-)
 
 
 
