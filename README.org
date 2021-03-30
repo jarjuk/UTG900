@@ -43,7 +43,7 @@
 Command
 
 #+BEGIN_SRC bash :eval no :results output :exports both
-./UTG900.py
+./UTG900.py [options]
 #+END_SRC
 
 starts UTG-900 - Tool in interactive mode, and prompts user with
