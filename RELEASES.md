@@ -3,8 +3,9 @@
 
 - Known issues:
   - README.org: API -usage documentation should be enhanced
-  - `UTG900.py arb` implementation not working
-  - `UTG900.py arb` waveform file format documentation missing
+  - `UTG900.py arb` internal waveform, implementation missing
+  - `UTG900.py arb` external waveform, implementation not working
+  - `UTG900.py arb` external waveform file, format documentation missing
 
 ## 0.0.5/20210330-10:07:31
 
