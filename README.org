@@ -155,7 +155,7 @@ shows commad usage
 
 #+RESULTS: help
 #+begin_example
-UTG900.py - 0.0.5-SNAPSHOT: Tool to control UNIT-T UTG900 Waveform generator
+UTG900.py - 0.0.6-SNAPSHOT: Tool to control UNIT-T UTG900 Waveform generator
 
 Usage: UTG900.py [options] [commands and parameters] 
 
@@ -179,6 +179,7 @@ More help:
   UTG900.py ? command=<command>             : to get help on command <command> parameters
 
 Examples:
+  UTG900.py                                 : start interactive mode
   UTG900.py ? command=sine                  : help on sine command parameters
   UTG900.py list_resources                  : Identify --addr option parameter
   UTG900.py --addr 'USB0::1::2::3::0::INSTR': Run interactively on device found in --addr 'USB0::1::2::3::0::INSTR'
@@ -586,6 +587,7 @@ parameters]] -section
 
 Release info in [[file:RELEASES.md]]
  
+
 * Fin                                                              :noexport:
 
 ** Emacs variables                                                 :noexport:

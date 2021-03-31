@@ -533,6 +533,7 @@ def mainMenuHelp(mainMenu):
     print( "  {} ? command=<command>             : to get help on command <command> parameters".format(CMD) )
     print( "")
     print( "Examples:")
+    print( "  {}                                 : start interactive mode".format(CMD))
     print( "  {} ? command=sine                  : help on sine command parameters".format(CMD))
     print( "  {} list_resources                  : Identify --addr option parameter".format(CMD))
     print( "  {} --addr 'USB0::1::2::3::0::INSTR': Run interactively on device found in --addr 'USB0::1::2::3::0::INSTR'".format(CMD))
