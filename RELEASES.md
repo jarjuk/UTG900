@@ -1,6 +1,8 @@
 
 ## 0.0.6-SNAPSHOT/20210330-10:09:33
 
+- Contributions: https://github.com/W3AXL data/simplewave.*
+
 - Known issues:
   - README.org: API -usage documentation should be enhanced
   - `UTG900.py arb` internal waveform, implementation missing
