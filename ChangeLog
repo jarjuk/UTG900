@@ -1,3 +1,9 @@
+2021-04-23  jj  <jj@santtu>
+
+	* UTG900/UTG900.py (UTG962.ilWriteFile):
+	https://www.eevblog.com/forum/profile/?u=768710 (jldr): patch for
+	uploading external waveform
+
 2021-03-29  jj  <jj@santtu>
 
 	* UTG900/UTG900.py (mainMenuHelp): added version output

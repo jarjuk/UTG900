@@ -38,6 +38,9 @@
 
 
 ** Usage
+:PROPERTIES:
+:header-args:bash: :dir  UTG900
+:END:
 
 *** Interactive usage
 
@@ -84,6 +87,7 @@ See section [[#commands-and-parameters][Commands and parameters]] below for deta
  : [GCC 9.3.0] on linux
  : Type "help", "copyright", "credits" or "license" for more information.
  : 0.0.5-SNAPSHOT
+
 
 ****  List resources
  #+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python* :exports both
@@ -275,7 +279,6 @@ Example usage:
 #+END_SRC
 
 #+RESULTS:
-: Successfully connected  'USB0::0x6656::0x0834::1485061822::INSTR' with 'UNI-T Technologies,UTG900,1485061822,1.08'
 
 
 *** ~sine~ - Generate sive wave
@@ -387,37 +390,26 @@ Parameters of  ~arb~ -command
 arb - Upload wave file and use it to generate wave on channel 1|2
 
         ch  : Channel 1,2 to switch on/off
-      freq  : Frequency [uHz|mHz|kHz|MHz]
+      freq  : Frequency [uHz|mHz|Hz|kHz|MHz]
        amp  : Amplitude [mVpp|Vpp|mVrms|Vrms]
     offset  : Offset [mV|V]
      phase  : Phase [deg]
   filePath  : Path to waveform file
+  fileName  : Name of the file on UTG900
 
 Notice:
-- parameters MUST BE given in the order listed above
-- parameters are optional and they MAY BE left out
+- parameters MUST be given in the order listed above
+- parameters are optional and they MAY be left out
 #+end_example
 
-*TDB* documenation missing
-
-#+BEGIN_SRC bash :eval no-export :results output :export results
-cat ../data/example1.csv
-#+END_SRC
-
-#+RESULTS:
-: /home/jj/work/UTG900/UTG900
-: 1,0.2
-: 2,0.1
-: 3,0.4
-
-*TBD* this does not work
+For example, to open channel ~1~ with ARB -file
+~../data/simplewave.bsv~ with the name ~Simple~ run
 
 #+BEGIN_SRC bash :eval no-export :results output
-./UTG900.py --debug 1  arb ch=1 filePath='../data/example1.csv'
+./UTG900.py arb ch=1 filePath='../data/simplewave.bsv' fileName="Simple"
 #+END_SRC
 
 #+RESULTS:
-
 
 
 *** ~on~ and ~off~ - Switch channel on/off
@@ -434,8 +426,8 @@ Parameters of  ~on~ -command
 :         ch  : Channel 1,2 to switch on/off
 : 
 : Notice:
-: - parameters MUST BE given in the order listed above
-: - parameters are optional and they MAY BE left out
+: - parameters MUST be given in the order listed above
+: - parameters are optional and they MAY be left out
 
 
 Parameters of ~off~ -command

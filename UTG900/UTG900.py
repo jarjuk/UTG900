@@ -175,14 +175,21 @@ class UTG962:
                   f.write( sShot)
              # Need to flip it over && convert to ext
              self.dibToImage( filePathDib, filePath )
-         def ilWriteFile( self, filePath):
+         def ilWriteFile( self, filePath, fileName="DEMO"):
              """Expect to be in Arb/WaveFile waitin for file loaction &&
-             updaload"""
+             updaload
+             
+             :filePath: path to binary bsv -file
+
+             :fileName: name to show in UTG900 signal generator
+
+             """
              self.ilFileLocation( "External")
-             with open( filePath) as fh:
-                 lines = fh.readlines()
-                 for line in lines:
-                     self.write( line )
+             with open( filePath, mode="rb") as fh:
+                 arbdata = fh.read()
+                 fileNameCommand = "WARB1:Carrier {}".format(fileName)
+                 self.write(fileNameCommand+chr(0))
+                 self.sgen.write_raw(arbdata)                 
          def ilConf( self, wave ):
              waveMap  = {
                 "Freq":   "1",
@@ -412,8 +419,10 @@ class UTG962:
              # Activate
              self.on(ch)
 
-         def arbGenerate( self, ch=1, wave="arb", filePath="tmp/apu.csv", freq=None, amp=None,  offset=None, phase=None ):
+         def arbGenerate( self, ch=1, wave="arb", filePath="tmp/apu.csv", freq=None, amp=None,  offset=None, phase=None, fileName="ARB" ):
              """Arb generation
+             
+             :fileName: name of file on UTG900 -device
              """
              # Deactivate
              self.off(ch)
@@ -424,7 +433,7 @@ class UTG962:
              # Upload file
              self.llDown()
              self.ilWaveArbProps( "WaveFile")
-             self.ilWriteFile( filePath = filePath )
+             self.ilWriteFile( filePath = filePath, fileName=fileName )
              # Frequencey (sine, square, pulse,arb)
              if freq is not None and not not freq:
                  self.ilWaveArbProps( "Freq")
@@ -475,6 +484,7 @@ sineProps = onOffProps | {
         
 arbProps = sineProps | {
     'filePath'  :   "Path to waveform file",
+    'fileName'  :   "Name of the file on UTG900",
 }
         
 squareProps = sineProps | {

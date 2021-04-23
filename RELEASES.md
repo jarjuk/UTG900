@@ -1,12 +1,18 @@
 
 ## 0.0.6-SNAPSHOT/20210330-10:09:33
 
-- Contributions: https://github.com/W3AXL data/simplewave.*
+Issues fixed:
 
-- Known issues:
-  - README.org: API -usage documentation should be enhanced
   - `UTG900.py arb` internal waveform, implementation missing
   - `UTG900.py arb` external waveform, implementation not working
+
+- Contributions:
+    - https://github.com/W3AXL data/simplewave.*
+    - https://www.eevblog.com/forum/profile/?u=768710 (jldr): patch
+      for uploading external waveform
+
+- Known issues:
+   - README.org: API -usage documentation should be enhanced
   - `UTG900.py arb` external waveform file, format documentation missing
 
 ## 0.0.5/20210330-10:07:31
