@@ -3,7 +3,18 @@
 :TOC:      :include all
 :END:
 
+*NOTICE!!*
+#+begin_example
+
+
+#+end_example
 *Superseded by `ebUnit` -command in* https://github.com/jarjuk/ebench
+#+begin_example
+
+
+
+#+end_example
+
 
 :CONTENTS:
 - [[#utg-900---tool-to-control-unit-t-utg900-waveform-generator-release007-snapshot][UTG-900 - Tool to control UNIT-T UTG900 Waveform generator $Release:0.0.7-SNAPSHOT$]]
