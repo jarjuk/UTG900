@@ -1,5 +1,8 @@
 
 ## 0.0.7-SNAPSHOT/20210502-21:32:04
+
+Superseded by `ebUnit` in https://github.com/jarjuk/ebench
+
 ## 0.0.6/20210423-19:48:00
 
 Issues fixed:

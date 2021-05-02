@@ -200,7 +200,7 @@ pyinstaller UTG900/UTG900.py --onefile
  #+END_SRC
 
  #+RESULTS:
- : [master eddee62] ## 0.0.6-SNAPSHOT/20210330-10:09:33
+ : [main 4e0e046] ## 0.0.7-SNAPSHOT/20210502-21:32:04
  :  3 files changed, 4 insertions(+), 3 deletions(-)
 
 
